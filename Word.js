@@ -22,6 +22,7 @@ function Word(word){
 
 			this.display.push(letter.replace());
 		}
+		
 	}
 	this.review = function(guessedLetter){
 		for(var i = 0; i < this.letterArray.length; i++){
@@ -34,27 +35,13 @@ function Word(word){
 }
 
 
-var word = new Word("test");
+//var word = new Word("test");
 
 
+// word.createLetter();
 
-console.log(word.display);
-console.log("----------------")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//console.log("----------------")
 
 module.exports = Word;
+
+
