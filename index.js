@@ -39,7 +39,7 @@ var inquirer = require("inquirer");
 
 var wordBank = ["test", "values", "stop"];
 //chosen word
-var targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];;
+var targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 //guesses reamining
 var guessesLeft = 10;
 //wins
@@ -64,17 +64,31 @@ function gameSetup(){
 }
 
 function runGame(){
+	var generateWord = new Word(targetWord)
 
 	inquirer.prompt([
 		        {
-		          name: "name",
+		          name: "guess",
 		          message: "Guess a letter!"
 		        }
 		]).then(function(answers){
+			console.log("<-----Hangman Game------->")
+			var guess = answers.guess;
+			var guessCorrect = generateWord.review(guess);
+			if (!guessCorrect) {
+				// remove one from guesses remaining
+			}
 
+			// display updated game state
+			// check to see if they won or lost
+			
 
+			// for(var i = 0; i < generateWord.length; i++){
+			// 	if(guess === )
+			// 	generateWord.createLetter();
+			// 	console.log(generateWord.display.join(" "));
 
-
+			// };
 
 	//invoke functions for Word
 	})
