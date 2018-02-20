@@ -65,33 +65,39 @@ function gameSetup(){
 
 function runGame(){
 	var generateWord = new Word(targetWord)
+	for(var i = 0; i < Word.letterArray.length; i++){
+		inquirer.prompt([
+			        {
+			          name: "guess",
+			          message: "Guess a letter!"
+			        }
+			]).then(function(answers){
+				console.log("<-----Hangman Game------->")
+				var guess = answers.guess;
+				var guessCorrect = generateWord.review(guess);
+				if (!guessCorrect) {
+					guessesLeft--;
+					guessedLetters.push(guess);
+				}else{
+					Letter.revealed == true;
 
-	inquirer.prompt([
-		        {
-		          name: "guess",
-		          message: "Guess a letter!"
-		        }
-		]).then(function(answers){
-			console.log("<-----Hangman Game------->")
-			var guess = answers.guess;
-			var guessCorrect = generateWord.review(guess);
-			if (!guessCorrect) {
-				// remove one from guesses remaining
-			}
 
-			// display updated game state
-			// check to see if they won or lost
-			
+				}
 
-			// for(var i = 0; i < generateWord.length; i++){
-			// 	if(guess === )
-			// 	generateWord.createLetter();
-			// 	console.log(generateWord.display.join(" "));
+				// display updated game state
+				// check to see if they won or lost
+				
 
-			// };
+				// for(var i = 0; i < generateWord.length; i++){
+				// 	if(guess === )
+				// 	generateWord.createLetter();
+				// 	console.log(generateWord.display.join(" "));
 
-	//invoke functions for Word
-	})
+				// };
+
+		//invoke functions for Word
+			})
+	};
 }
 
 gameSetup();
