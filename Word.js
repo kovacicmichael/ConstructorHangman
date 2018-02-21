@@ -9,14 +9,18 @@ var Letter = require("./letter.js")
 function Word(word){
 	this.letterArray = word.split("");
 	this.display = [];
+	this.letterObject = [];
 	this.guesses = 10;
 	this.createLetter = function(){
 		for(var i = 0; i < this.letterArray.length; i++){
 
 			var letter = new Letter(this.letterArray[i]);
 
+			this.letterObject.push(letter);
 			this.display.push(letter.replace());
 		}
+		//console.log(this.letterObject);
+		//console.log(this.display);
 		
 	}
 	this.review = function(guessedLetter){
@@ -25,11 +29,11 @@ function Word(word){
 
 			var letter = new Letter(this.letterArray[i]);
 
-			var letterCorrect = letter.check(guessedLetter);
+			var letterCorrect = this.letterObject[i].check(guessedLetter);
 			if (letterCorrect) {
 				isCorrect = true;
 			}
-		}
+		};
 
 		if (isCorrect) {
 			return true;
@@ -37,7 +41,22 @@ function Word(word){
 			return false;
 		}
 	}
+	this.updateDisplay = function(){
+		this.display = [];
+		var me = this
+		this.letterObject.forEach(function(letter){
+			//console.log("push")
+			me.display.push(letter.replace())
+		})
+	}
+	this.updateDisplay = this.updateDisplay.bind(this);
 }
+
+var word = new Word("dog");
+
+//console.log(word);
+
+word.createLetter();
 
 //var word = new Word("test");
 
