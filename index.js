@@ -52,16 +52,16 @@ var guessedWords = [];
 var generateWord = new Word(targetWord);
 //console.log(targetWord);
 
-
 //game setup
 function gameSetup(){
 	generateWord.createLetter();
+	var guessesLeft = 10;
+	var guessedLetters = [];
+	//var generateWord = new Word(targetWord);
 	//display();
-	console.log("Remaining Guesses: " + guessesLeft);
+	//console.log("Remaining Guesses: " + guessesLeft);
 	runGame();
-
-	
-}
+};
 
 function runGame(){
 	display();
@@ -75,13 +75,14 @@ function runGame(){
 				var guess = answers.guess;
 				var guessCorrect = generateWord.review(guess);
 				var exist = guessedLetters.indexOf(guess);
-				if (!guessCorrect && exist != -1) {
+				if (!guessCorrect) {
 					console.log("Incorrect Guess!!")
 					guessesLeft--;
 					guessedLetters.push(guess);
-					console.log("Letters Guessed: " + guessedLetters);
+					//console.log("Letters Guessed: " + guessedLetters);
 					//check for game loss
 					if(isGameLost()){
+						console.log("You are out of Guesses!!")
 						reset();
 					}else{
 						runGame();
@@ -96,8 +97,6 @@ function runGame(){
 					runGame();
 
 				}
-
-					//Letter.revealed == true;
 					//if correct guess
 				// display updated game state
 				// check to see if they won or lost
@@ -106,20 +105,22 @@ function runGame(){
 			});
 };
 
-
 function isGameLost(){
-	return guessesLeft < 1 
-}
+	return guessesLeft < 2; 
+	reset();
+};
 
 function isGameWon(){
 	return 
-}
+};
 
 function reset(){
-	var generateWord = new Word(targetWord);
 	var guessesLeft = 10;
+	var guessedLetters = [];
+	display();
+	runGame();
 
-}
+};
 
 function display(){
 	console.log("<-----Hangman Game------->")
