@@ -52,11 +52,16 @@ function Word(word){
 	this.updateDisplay = this.updateDisplay.bind(this);
 }
 
-var word = new Word("dog");
+
+function wordReset(){
+
+}
+
+//var word = new Word("dog");
 
 //console.log(word);
 
-word.createLetter();
+//word.createLetter();
 
 //var word = new Word("test");
 

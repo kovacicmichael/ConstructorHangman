@@ -49,6 +49,8 @@ var guessedLetters = [];
 //already guessed words pushed here
 var guessedWords = [];
 
+var correctLetters = [];
+
 var generateWord = new Word(targetWord);
 //console.log(targetWord);
 
@@ -83,6 +85,7 @@ function runGame(){
 					//check for game loss
 					if(isGameLost()){
 						console.log("You are out of Guesses!!")
+						console.log("Next Word!")
 						reset();
 					}else{
 						runGame();
@@ -90,18 +93,20 @@ function runGame(){
 
 				}else{
 					//check for win
+					correctLetters.push(guess)
+					isGameWon();
+
 					console.log("Correct Guess!");
+					console.log(correctLetters)
+
 					console.log("Letters Guessed: " + guessedLetters);
 					generateWord.updateDisplay();
+					console.log("-----------------------------------------------");
+					console.log(generateWord.display);
 					//display();
 					runGame();
 
 				}
-					//if correct guess
-				// display updated game state
-				// check to see if they won or lost
-
-		//invoke functions for Word
 			});
 };
 
@@ -111,14 +116,21 @@ function isGameLost(){
 };
 
 function isGameWon(){
-	return 
+	if(correctLetters.indexOf(generateWord.display)){
+			return;
+			console.log("Well done! You got it!")
+			reset();
+		};
 };
 
 function reset(){
 	guessesLeft = 10;
 	targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+	generateWord = new Word(targetWord);
 	guessedLetters = [];
-	display();
+	generateWord.createLetter();
+
+	//display();
 	runGame();
 };
 
