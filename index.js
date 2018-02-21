@@ -106,7 +106,7 @@ function runGame(){
 };
 
 function isGameLost(){
-	return guessesLeft < 2; 
+	return guessesLeft < 1; 
 	reset();
 };
 
@@ -115,11 +115,11 @@ function isGameWon(){
 };
 
 function reset(){
-	var guessesLeft = 10;
-	var guessedLetters = [];
+	guessesLeft = 10;
+	targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+	guessedLetters = [];
 	display();
 	runGame();
-
 };
 
 function display(){
