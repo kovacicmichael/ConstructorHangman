@@ -57,6 +57,7 @@ function runGame(){
 			}
 			if(isGameWon()){
 				console.log("");
+				console.log("The word was: " + targetWord)
 				console.log("Well done! You got it!")
 				console.log("Next Word!")
 				reset();
