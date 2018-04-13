@@ -1,4 +1,4 @@
 # ConstructorHangman
 
 
-![CLI Images](videos/constructorHangman.gif)
+![CLI Images](video/constructorHangman.gif)
