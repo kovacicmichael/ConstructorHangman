@@ -2,7 +2,7 @@
 const Word = require("./Word.js");
 const inquirer = require("inquirer");
 //sets all variables
-let wordBank = ["puppy", "mazda", "microsoft", "macintosh", "dfs"];
+let wordBank = ["snow", "guardian", "lanchaster", "sasha", "rootbeer", "trivial", "blanket", "dragon"];
 let targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 let guessesLeft = 10;
 let wins = 0;
@@ -59,7 +59,7 @@ function runGame(){
 				console.log("");
 				console.log("The word was: " + targetWord)
 				console.log("Well done! You got it!")
-				console.log("Next Word!")
+				console.log("Next Word!");
 				reset();
 			}else{
 				console.log("");
