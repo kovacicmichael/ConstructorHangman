@@ -1,8 +1,9 @@
 //requirements
 const Word = require("./Word.js");
 const inquirer = require("inquirer");
+var color = require('colors-cli');
 //sets all variables
-let wordBank = ["snow", "guardian", "lanchaster", "sasha", "rootbeer", "trivial", "blanket", "dragon"];
+let wordBank = ["snow", "guardians of the galaxy", "lanchaster", "sasha", "rootbeer", "trivial", "red blanket", "dragon fire"];
 let targetWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 let guessesLeft = 10;
 let wins = 0;
@@ -10,6 +11,7 @@ let guessedLetters = [];
 let guessedWords = [];
 let correctLetters = [];
 let generateWord = new Word(targetWord);
+let validate = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 //initiates rungame function called below
 function gameSetup(){
@@ -24,28 +26,37 @@ function runGame(){
 	inquirer.prompt([
         {
           name: "guess",
-          message: "Guess a letter!"
+          message: "Guess a letter!",
+          validate: function(input){
+          	if(validate.includes(input) === false){
+          		console.log(" Please enter a letter");
+          	}else{
+          		return true;
+          	}
+          }
         }
 	]).then(function(answers){
 		console.log("--------------------------------------------")
 		let guess = answers.guess;
 		let guessCorrect = generateWord.review(guess);
 		let exist = guessedLetters.indexOf(guess);
+		// console.log(correctLetters);
+		// console.log(generateWord.letterEndGame)
 		if (!guessCorrect) {
 			if(exist == -1){
 				guessedLetters.push(guess);
 				guessesLeft--;
 				console.log("");
-				console.log("Incorrect Guess!!");
+				console.log(color.red_bt("INCORRECT!"));
 			}else{
 				console.log("");
-				console.log("That letter was already guessed.")
+				console.log(color.yellow("That letter was already guessed."))
 			}
 			if(isGameLost()){
 				console.log("");
-				console.log("You are out of Guesses!!");
-				console.log("The word was: " + targetWord);
-				console.log("Next Word!")
+				console.log(color.red("You are out of Guesses!!"));
+				console.log(color.red("The word was: " + color.blue(targetWord)));
+				console.log(color.blue("Next Word!"))
 				reset();
 			}else{
 				runGame();
@@ -57,13 +68,13 @@ function runGame(){
 			}
 			if(isGameWon()){
 				console.log("");
-				console.log("The word was: " + targetWord)
-				console.log("Well done! You got it!")
-				console.log("Next Word!");
+				console.log(color.green("Well done! You got it!"));
+				console.log(color.green("The word was: " + color.red(targetWord)));
+				console.log(color.blue("Next Word!"));
 				reset();
 			}else{
 				console.log("");
-				console.log("Correct Guess!");
+				console.log(color.blue_bt("CORRECT!"));
 				generateWord.updateDisplay();
 				console.log("")
 				console.log("-----------------------------------------------");
@@ -96,10 +107,11 @@ function reset(){
 //displays the game's progression
 function display(){
 	console.log("")
-	console.log("<-----Hangman Game------->")
-	console.log(generateWord.display.join(" "));
+	console.log("<-----Constructor Hangman------->")
 	console.log("Incorrect Letters Guessed: " + guessedLetters);
 	console.log("Remaining Guesses: " + guessesLeft);
+	console.log("");
+	console.log(generateWord.display.join(" "));
 	console.log("");
 };
 //initiates the entire game when the file is opened

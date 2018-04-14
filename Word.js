@@ -12,7 +12,7 @@ function Word(word){
 	//creates a Letter object from the letterArray, also pushes the letters into the letterEndGame array
 	this.createLetter = function(){
 		for(var i = 0; i < this.letterArray.length; i++){
-			if(this.letterEndGame.indexOf(this.letterArray[i]) == -1){
+			if(this.letterEndGame.indexOf(this.letterArray[i]) == -1 && this.letterArray[i] != " "){
 				this.letterEndGame.push(this.letterArray[i])
 			};
 			var letter = new Letter(this.letterArray[i]);

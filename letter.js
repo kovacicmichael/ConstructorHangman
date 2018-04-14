@@ -5,6 +5,9 @@ function Letter(letter){
 	this.revealed = false;
 	//returns the letter or the "_" based off of user guesses
 	this.replace = function(){
+		if(this.value === " "){
+			this.revealed = true;
+		}
 		if(this.revealed){
 			return (this.value)
 		}else{
